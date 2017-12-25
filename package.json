@@ -13,6 +13,8 @@
   "dependencies": {
     "fs": "0.0.1-security",
     "lodash": "^4.17.4",
+    "mongoose": "^4.13.7",
+    "promise": "^8.0.1",
     "request": "^2.83.0",
     "shortid": "^2.2.8",
     "x-ray": "^2.3.2"

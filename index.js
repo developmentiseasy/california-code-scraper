@@ -5,19 +5,48 @@ const fs = require('fs')
 
 const xray = new Xray()
 
-getResult = (err, results) => {
+const URL = 'http://leginfo.legislature.ca.gov/faces/codes.xhtml'
 
-
-  results.id = shortid.generate()
-  results.write('results.json')
-  console.log(results)
+const selectorsList = {
+  californiaConst: {
+    selector: 'div.displaycodeleftmargin div div',
+    body: {
+      title: 'a',
+      url: 'a@href',
+    }
+  },
+  codesCategory: {
+    selector: 'form#codestreeForm2 div.codes_toc_list',
+    body: {
+      title: 'a.portletNav span',
+      url: 'a@href',
+    }
+  },
+  generalProvisions: {
+    selector:'div.manylawsections div font div@align=left',
+    body: {
+      code: 'p$style=margin',
+      description: 'a@href',
+    }
+  },
 }
 
-xray('http://jedicode.co', 'div.post.py3', [{
-  title: 'h3.h1',
-  created_date: 'p',
-  description: 'span.post-summary',
-  url: 'a.post-link@href',
-}])(getResult)
+let selector
 
-// console.log(xray.paginate())
+getResult = (err, results) => {
+  if (results.length === 0) {
+    selector = selectorsList.codesCategory
+  } else {
+    selector = selectorsList.generalProvisions
+  }
+  console.log(results)
+
+  results.forEach(item => {
+    xray(item.url, selector, [{
+      title: 'a',
+      url: 'a@href',
+    }])(getResult)
+  })
+}
+
+xray(URL, selectorsList.californiaConst, [selectorsList.californiaConst.body])(getResult)
