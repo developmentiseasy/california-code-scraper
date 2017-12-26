@@ -1,0 +1,21 @@
+{
+  "listOfCodeCategoties": [
+    {
+      "selector": "#codestocheader > div.displaycodeleftmargin > div.codesIndexTblLeftdiv > div",
+      "body": {
+        "catogoryName": "a",
+        "catogoryUrl": "a@href",
+        "listOfCodes": {
+          "nameOfList": "#codestreeForm2 > div.treecodetitle",
+          "list": {
+            "codeName": "#codestreeForm2 > div.codes_toc_list > a",
+            "codeUrl": "#codestreeForm2 > div.codes_toc_list > a@href",
+            "": {
+
+            }
+          }
+        }
+      }
+    }
+  ]
+}
